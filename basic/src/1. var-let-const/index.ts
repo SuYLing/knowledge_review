@@ -27,7 +27,7 @@ console.log(aa, "aa"); // 成功 1
  * 3. 访问到全局作用域的 i
  * */
 function var_test() {
-  console.log(a); // undefined
+  // console.log(a); // undefined
   var a = 1;
   console.log(a); // 1
 
