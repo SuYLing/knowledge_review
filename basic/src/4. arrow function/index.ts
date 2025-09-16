@@ -5,13 +5,13 @@
  * */
 
 const obj = {
-  name: "yuling",
-  age: 22,
-  say1() {
-    setTimeout(() => {
-      console.log(`hello ${this.name} age ${this.age}`);
-    });
-  }, //此时报错
-};
-obj.say1(); // 正常
-setTimeout(obj.say1, 0); // undefined
+	name: 'yuling',
+	age: 22,
+	say1() {
+		setTimeout(() => {
+			console.log(`hello ${this.name} age ${this.age}`)
+		})
+	}, //此时报错
+}
+obj.say1() // 正常
+setTimeout(obj.say1, 0) // undefined
