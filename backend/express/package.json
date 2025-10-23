@@ -1,0 +1,24 @@
+{
+	"name": "express",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"scripts": {
+		"serve": "tsx watch ./src/main.ts",
+		"build": "tsup"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"packageManager": "pnpm@10.18.2",
+	"dependencies": {
+		"express": "^5.1.0"
+	},
+	"devDependencies": {
+		"@types/express": "^5.0.3",
+		"tsup": "^8.5.0",
+		"tsx": "^4.20.6",
+		"typescript": "^5.9.3"
+	}
+}
+
