@@ -11,11 +11,19 @@ class MPromise {
 	constructor(executor) {
 		setTimeout(() => {
 			console.log(this)
-			executor(this.resolve.bind(this), this.reject.bind(this))
+			executor(this._resolve.bind(this), this._reject.bind(this))
 		})
 	}
 	resolve(value) {
 		if (this.state !== PENDING_STATE) return
+
+		this._resolve(value)
+	}
+	reject(reason) {
+		if (this.state !== PENDING_STATE) return
+		this._resolve(reason)
+	}
+	_resolve(value) {
 
 		// 变更状态，设置值，执行函数
 		this.value = value
@@ -24,7 +32,7 @@ class MPromise {
 			cb(this.value)
 		}
 	}
-	reject(reason) {
+	_reject(reason) {
 		if (this.state !== PENDING_STATE) return
 		// 变更状态，设置值，执行函数
 		this.value = reason
