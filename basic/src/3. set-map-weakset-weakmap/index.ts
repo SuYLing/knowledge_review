@@ -44,7 +44,10 @@ console.log(weakSet.has(obj))
  * 3. 对于键也是弱引用
  * */
 const weakMap = new WeakMap()
-const objKey = {}
+let objKey = {}
 weakMap.set(objKey, 'value')
-console.log(weakMap.has(objKey))
+// console.log(weakMap.has(objKey))
+console.log(weakMap.get(objKey))
+objKey = null // 解除引用
+console.log(weakMap.get(objKey))
 //#endregion
