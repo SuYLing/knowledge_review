@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
+import { CommonCounter } from './components/common-counter'
 import { Counter, CounterProvider } from './components/counter'
 import { Input } from './components/ui/input'
 
@@ -60,6 +61,7 @@ function App() {
 			<CounterProvider>
 				<Counter />
 			</CounterProvider>
+			<CommonCounter />
 		</div>
 	)
 }
