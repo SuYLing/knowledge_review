@@ -38,7 +38,7 @@ type MyPick<T, K extends keyof T> = {
 const d: MyPick<Original, 'age'> = {
 	age: 12,
 }
-
+type Exclude<T, U> = T extends U ? never : T
 type MyOmit<T, K extends keyof T> = {
 	[P in keyof T as P extends K ? never : P]: T[P]
 }
