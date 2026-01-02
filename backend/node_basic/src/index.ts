@@ -17,3 +17,6 @@ console.log(__dirname)
 
 //#endregion
 
+//#region 一些文件的引入
+import './http'
+//#endregion
