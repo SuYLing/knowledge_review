@@ -10,7 +10,6 @@
 		"module": "nodenext",
 		"target": "esnext",
 		"types": [],
-		"allowSyntheticDefaultImports": false,
 		// For nodejs:
 		// "lib": ["esnext"],
 		// "types": ["node"],
@@ -43,3 +42,4 @@
 		"skipLibCheck": true
 	}
 }
+
