@@ -1,11 +1,30 @@
 import { Router } from 'express'
 const productRouter: Router = Router()
-
+const prods = [
+	{
+		id: 1,
+		name: '衣服',
+	},
+	{
+		id: 2,
+		name: '裤子',
+	},
+	{
+		id: 3,
+		name: '帽子',
+	},
+]
 productRouter.get('/:id', (req, res) => {
-	const name = req.params.id
-	console.log(name)
-	res.setHeader('content-type', 'text/plain;charset=utf8')
-	res.end(`hello ${name}`)
+	try {
+		const id = parseInt(req.params.id)
+		res.writeHead(200, {
+			'content-type': 'application/json',
+		})
+		res.end(JSON.stringify(prods.filter((p) => p.id === id)))
+	} catch (error) {
+		console.log(error)
+		res.end(`something wrong`)
+	}
 })
 
 productRouter.post('/', (req, res) => {
