@@ -1,8 +1,12 @@
 import express from 'express'
+import path from 'node:path'
 import { TimeLoggerMiddleware } from './middlewares/timeLogger.middleware.js'
 import homeRouter from './routers/home.js'
 import productRouter from './routers/product.js'
 const app = express()
+// 设置模版引擎
+app.set('view engine', 'ejs')
+app.set('views', path.join(import.meta.dirname, './views'))
 
 app.use(express.json())
 // Home router

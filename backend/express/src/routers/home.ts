@@ -3,8 +3,22 @@ const homeRouter: Router = Router()
 
 homeRouter.get('/', (req, res) => {
 	const name = req.query.name
-	res.setHeader('content-type', 'text/plain;charset=utf8')
-	res.end(`hello ${name}`)
+
+	res.render('home', {
+		title: '欢迎',
+		name: '羽澪',
+		hobbies: [
+			{
+				title: '篮球',
+			},
+			{
+				title: '足球',
+			},
+			{
+				title: '乒乓球',
+			},
+		],
+	})
 })
 
 homeRouter.post('/', (req, res) => {
@@ -15,3 +29,4 @@ homeRouter.post('/', (req, res) => {
 })
 
 export default homeRouter
+
