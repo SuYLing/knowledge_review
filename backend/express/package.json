@@ -5,7 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"serve": "tsx watch ./src/main.ts",
-		"build": "tsup"
+		"build": "tsup",
+		"db:server": "docker compose up -d"
 	},
 	"keywords": [],
 	"author": "",
@@ -13,7 +14,8 @@
 	"packageManager": "pnpm@10.18.2",
 	"dependencies": {
 		"date-fns": "^4.1.0",
-		"express": "^5.1.0"
+		"express": "^5.1.0",
+		"mongoose": "^9.1.1"
 	},
 	"devDependencies": {
 		"@types/express": "^5.0.3",
@@ -23,3 +25,4 @@
 		"typescript": "^5.9.3"
 	}
 }
+

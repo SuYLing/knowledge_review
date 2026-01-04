@@ -1,5 +1,6 @@
 import express from 'express'
 import path from 'node:path'
+import './db/mongo.js'
 import { TimeLoggerMiddleware } from './middlewares/timeLogger.middleware.js'
 import homeRouter from './routers/home.js'
 import productRouter from './routers/product.js'
