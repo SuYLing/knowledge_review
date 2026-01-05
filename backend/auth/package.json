@@ -2,11 +2,11 @@
 	"name": "auth",
 	"version": "1.0.0",
 	"description": "",
-  "type": "module",
+	"type": "module",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-    "serve":"tsx watch ./src/index.ts"
+		"serve": "tsx watch ./src/index.ts"
 	},
 	"keywords": [],
 	"author": "",
@@ -19,7 +19,7 @@
 		"typescript": "^5.9.3"
 	},
 	"dependencies": {
-		"express": "^5.2.1"
+		"express": "^5.2.1",
+		"mongoose": "^9.1.1"
 	}
 }
-
