@@ -6,12 +6,15 @@
 // import "./6. promise"
 
 // import "./7. infer"
-const obj = {
-	name: 'hello',
-}
-const fn = (obj1: Record<string, string>) => {
-	obj1.age = '212'
-	console.log(obj1)
-}
-fn(obj)
-console.log(obj)
+// import "./8. clone"
+
+import './9. arrayToTree'
+// const obj = {
+// 	name: 'hello',
+// }
+// const fn = (obj1: Record<string, string>) => {
+// 	obj1.age = '212'
+// 	console.log(obj1)
+// }
+// fn(obj)
+// console.log(obj)
