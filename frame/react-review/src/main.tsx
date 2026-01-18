@@ -1,13 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
 import './index.css'
 import { ReactQueryProvider } from './providers/react-query-provider.tsx'
+import { TanstackRouterProvider } from './providers/tanstack-router-provider.tsx'
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
 		<ReactQueryProvider>
-			<App />
+			<TanstackRouterProvider />
 		</ReactQueryProvider>
 	</StrictMode>,
 )
