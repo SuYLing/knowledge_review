@@ -27,7 +27,6 @@ export const getBookById: Handler = async (req, res) => {
 		const bookId = req.params.id
 		const book = await BookModel.findById(bookId)
 		if (book) {
-			console.log(book)
 			res.status(200).json({
 				success: true,
 				message: 'get book success',
