@@ -6,7 +6,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"serve": "tsx watch ./src/index.ts"
+		"serve": "cross-env MODE=dev  tsx watch ./src/index.ts"
 	},
 	"keywords": [],
 	"author": "",
@@ -19,6 +19,8 @@
 		"typescript": "^5.9.3"
 	},
 	"dependencies": {
+		"cross-env": "^10.1.0",
+		"dotenv": "^17.3.1",
 		"express": "^5.2.1",
 		"mongoose": "^9.1.1"
 	}

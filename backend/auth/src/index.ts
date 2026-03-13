@@ -1,7 +1,14 @@
-import express from 'express'
+import express from 'express';
+import "./configs/env.js";
+import { connectToDB } from "./db/index.js";
+import { loginRouter } from './routes/login.js';
+import { registerRouter } from './routes/register.js';
+connectToDB()
 const app = express()
-
 app.use(express.json())
+
+app.use("/login", loginRouter)
+app.use("/register", registerRouter)
 
 const PORT = 3000
 app.listen(PORT, () => {

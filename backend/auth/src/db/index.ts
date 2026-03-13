@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-
 const { MONGO_URL, MONGO_PSW, MONGO_USER } = process.env
+console.log("process.env", MONGO_URL, MONGO_PSW, MONGO_USER)
 
 export const connectToDB = async () => {
 	try {
