@@ -4,6 +4,7 @@ declare namespace NodeJS {
 		MONGO_PSW: string
 		MONGO_USER: string
 		PORT: number
+		JWT_SECRET_KEY: string
 	}
 }
 
