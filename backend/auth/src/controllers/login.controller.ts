@@ -23,7 +23,7 @@ export const loginUser: Handler = async (req, res) => {
         username: userInfo.username,
         role: userInfo.role
       }, process.env.JWT_SECRET_KEY, {
-        expiresIn: '1m'
+        expiresIn: '30m'
       })
       res.status(200).json({
         success: true,
