@@ -7,8 +7,8 @@ connectToDB()
 const app = express()
 app.use(express.json())
 
-app.use("/login", loginRouter)
-app.use("/register", registerRouter)
+app.use("/api/login", loginRouter)
+app.use("/api/register", registerRouter)
 
 const PORT = 3000
 app.listen(PORT, () => {
