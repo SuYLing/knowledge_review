@@ -1,9 +1,8 @@
 import type { Handler } from "express";
 import { ImageModel } from "../models/image.js";
 import { uploadToCloudinary } from "../utils/cloudinary.js";
-
+import fs from "node:fs/promises";
 export const uploadImage: Handler = async (req, res) => {
-  console.log(req.file)
   try {
     if (!req.file) {
       return res.status(400).json({
@@ -12,6 +11,8 @@ export const uploadImage: Handler = async (req, res) => {
       })
     }
     const { publicId, url } = await uploadToCloudinary(req.file.path)
+    // delete image from local
+    await fs.unlink(req.file.path)
     const newImage = await ImageModel.create({
       publicId,
       url,
