@@ -2,6 +2,7 @@ import express from 'express';
 import "./configs/env.js";
 import { connectToDB } from "./db/index.js";
 import { adminRouter } from './routes/admin.js';
+import { changePasswordRouter } from './routes/change-password.js';
 import { homeRouter } from './routes/home.js';
 import { imageRouter } from './routes/image.js';
 import { loginRouter } from './routes/login.js';
@@ -14,7 +15,7 @@ app.use("/api/login", loginRouter)
 app.use("/api/register", registerRouter)
 app.use("/api/home", homeRouter)
 app.use("/api/admin", adminRouter)
-
+app.use("/api/change-password", changePasswordRouter)
 app.use("/api/image", imageRouter)
 
 const PORT = 3000

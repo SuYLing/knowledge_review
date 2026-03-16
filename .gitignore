@@ -140,3 +140,5 @@ vite.config.ts.timestamp-*
 
 docker/mongo/data
 mongo-data
+
+uploads
