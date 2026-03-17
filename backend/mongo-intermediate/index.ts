@@ -1,5 +1,8 @@
 import express from "express"
-import "./configs/env"
+import "./configs/env.js"
+import { connectToDB } from "./db/index.js"
+connectToDB()
+
 const app = express()
 
 
