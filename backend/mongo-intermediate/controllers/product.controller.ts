@@ -26,6 +26,20 @@ export const insertProducts: Handler = async (req, res) => {
         isStock: true,
         tags: ['帽子', '男女通用']
       },
+      {
+        name: '鞋子',
+        category: '鞋子',
+        price: 90,
+        isStock: true,
+        tags: ['鞋子', '男女通用']
+      },
+      {
+        name: '袜子',
+        category: '袜子',
+        price: 20,
+        isStock: false,
+        tags: ['袜子', '男女通用']
+      }
     ]
     const result = ProductModel.insertMany(products)
     res.status(201).json({
@@ -49,6 +63,46 @@ export const getAllProducts: Handler = async (req, res) => {
       success: true,
       message: 'products fetched successfully',
       data: products
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      success: false,
+      message: 'something went wrong! Please try again',
+    })
+  }
+}
+
+export const getProductStats: Handler = async (req, res) => {
+  try {
+    const result = await ProductModel.aggregate([
+      {
+        $match: {
+          isStock: true,
+          price: {
+            $gte: 100
+          },
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          total: {
+            $sum: "$price"
+          },
+          averagePrice: {
+            $avg: "$price"
+          },
+          maxPrice: {
+            $max: "$price"
+          }
+        }
+      }
+    ])
+    res.status(200).json({
+      success: true,
+      message: 'products fetched successfully',
+      data: result
     })
   } catch (error) {
     console.log(error)
