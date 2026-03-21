@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Chat app</title>
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	</head>
+	<body>
+		<div
+			class="container border flex flex-col gap-2 min-h-[460px] p-4 border-gray-200 rounded-2xl shadow-orange-200 mx-auto"
+		>
+			<div id="user-list" class="border-2 p-2 border-amber-100">
+				<h1>Online Users</h1>
+				<div id="users"></div>
+			</div>
+			<div id="chat-box"></div>
+			<form id="chat-form" class="flex flex-col gap-2">
+				<input type="text" id="msg-input" class="border border-gray-300" />
+				<button type="submit">send</button>
+			</form>
+		</div>
+		<script src="https://cdn.socket.io/4.8.3/socket.io.min.js"></script>
+		<script>
+			const form = document.getElementById('chat-form')
+			const input = document.getElementById('msg-input')
+			const usersBox = document.getElementById('users')
+			const socket = io()
+			window.addEventListener('DOMContentLoaded', () => {
+				const username = prompt('请输入用户名：')
+				socket.emit('join', username)
+			})
+			// 用户加入完成
+			socket.on('joined', (users) => {
+				console.log('xxxx')
+				const fragment = document.createDocumentFragment()
+				users.forEach((user) => {
+					const li = document.createElement('li')
+					li.textContent = user
+					fragment.appendChild(li)
+				})
+				usersBox.appendChild(fragment)
+			})
+			socket.on('chat message', (msg) => {
+				const div = document.createElement('div')
+				div.textContent = msg
+				document.getElementById('chat-box').appendChild(div)
+			})
+			form.addEventListener('submit', (e) => {
+				e.preventDefault()
+				if (input.value) {
+					socket.emit('chat message', input.value)
+					input.value = ''
+				}
+			})
+		</script>
+	</body>
+</html>
+
