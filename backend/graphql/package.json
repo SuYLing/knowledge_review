@@ -14,11 +14,14 @@
   "packageManager": "pnpm@10.32.1",
   "dependencies": {
     "@apollo/server": "^5.4.0",
+    "dotenv": "^17.3.1",
     "graphql": "^16.13.1",
     "graphql-tag": "^2.12.6",
+    "mongoose": "^9.3.1",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@types/node": "^25.5.0",
     "tsx": "^4.21.0"
   }
 }
