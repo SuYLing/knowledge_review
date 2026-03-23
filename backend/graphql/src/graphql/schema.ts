@@ -5,6 +5,7 @@ export const typeDefs = gql`
     name: String!
     category: String!
     price: Float!
+    inStock: Boolean!
   }
 
   type Query {
@@ -13,9 +14,9 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createProduct(name: String!, category: String!, price: Float!): Product
-    deleteProduct(id: ID!): Boolean
-    updateProduct(id: ID!, name: String!, category: String!, price: Float!): Product
+    createProduct(name: String!, category: String!, price: Float!, inStock: Boolean!): Product!
+    deleteProduct(id: ID!): Boolean!
+    updateProduct(id: ID!, name: String!, category: String!, price: Float!, inStock: Boolean!): Product
   }
 
 `
