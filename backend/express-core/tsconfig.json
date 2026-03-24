@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"types": ["./global.d.ts"]
+		"typeRoots": ["./src/types/**/*.ts"]
 	},
 	"include": ["./global.d.ts", "./src/**/*.ts"]
 }

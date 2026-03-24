@@ -1,17 +1,22 @@
 import cors from 'cors'
 
 const allowedOrigins = [
-  "http://localhost:3000"
+  "http://localhost:5173"
 ]
 
 export const corsConfigure = () => {
   return cors({
     // 允许的请求源
     origin(requestOrigin, callback) {
-      if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
-        callback(null, true) // 允许通过
+      console.log(requestOrigin)
+      if (!requestOrigin) {
+        // 同源 放过
+        return callback(null, true) // 允许通过
+      }
+      if (allowedOrigins.includes(requestOrigin)) {
+        return callback(null, true) // 允许通过
       } else {
-        callback(new Error("not allowed by cors"))
+        return callback(new Error("not allowed by cors"))
       }
     },
     methods: ["GET", "POST", "PUT", "DELETE"],
