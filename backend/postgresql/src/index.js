@@ -1,4 +1,5 @@
-import { getSortedUsers,getPaginatedUsers } from "./concepts/sorting-pagination.js"
+import { createPostTable } from "./concepts/relationships.js"
+import { getPaginatedUsers } from "./concepts/sorting-pagination.js"
 
 async function testQueries(params) {
   try {
@@ -20,4 +21,15 @@ async function testQueries(params) {
   }
 }
 
-testQueries()
+async function testRelationsQeurise() {
+  try { 
+
+    await createPostTable()
+  }
+  catch (err) {
+    console.log(err)
+  }
+}
+
+// testQueries()
+testRelationsQeurise()
