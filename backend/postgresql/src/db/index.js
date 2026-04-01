@@ -1,4 +1,5 @@
-import { Pool } from "pg"
+import { Pool, types } from "pg"
+types.setTypeParser(20, val => Number(val))
 
 const pool = new Pool({
   connectionString: "postgre://postgres:123yuling@localhost:5432",

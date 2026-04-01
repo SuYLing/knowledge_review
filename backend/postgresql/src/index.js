@@ -1,8 +1,8 @@
+import { countPostsByUser, getAveragePostNumber } from "./concepts/aggregation.js"
 import { getAllUsersWithTheirPosts, getUsersWithPosts } from "./concepts/join.js"
 import { insertPost } from "./concepts/relationships.js"
 import { getPaginatedUsers } from "./concepts/sorting-pagination.js"
-
-async function testQueries(params) {
+async function testQueries() {
   try {
     // await insertUser("yuling", "sadad@gmail.com")
     // await insertUser("sak", "saewdad@gmail.com")
@@ -21,7 +21,7 @@ async function testQueries(params) {
     console.log(error)
   }
 }
-
+// testQueries()
 async function testRelationsQeurise() {
   try {
     // 建表
@@ -36,10 +36,8 @@ async function testRelationsQeurise() {
     console.log(err)
   }
 }
-
-// testQueries()
 // testRelationsQeurise()
-async function testJoinQueries(params) {
+async function testJoinQueries() {
   try {
     await getUsersWithPosts()
     await getAllUsersWithTheirPosts()
@@ -47,5 +45,13 @@ async function testJoinQueries(params) {
     console.log(error)
   }
 }
-
-testJoinQueries()
+// testJoinQueries()
+async function testAggregationQueries() {
+  try {
+    await countPostsByUser()
+    await getAveragePostNumber()
+  } catch (error) {
+    console.log(error)
+  }
+}
+testAggregationQueries()
