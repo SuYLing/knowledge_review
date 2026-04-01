@@ -18,3 +18,18 @@ export const createPostTable = async () => {
     console.log(error)
   }
 }
+
+// 插入数据
+export const insertPost = async (userId, title, content) => {
+  const sql = `
+    INSERt INTO posts (userId, title, content)
+    VALUES ($1, $2, $3)
+  `
+  try {
+    const result = await query(sql, [userId, title, content])
+    console.log(result.rows)
+    return result.rows
+  } catch (error) {
+    console.log(error)
+  }
+}

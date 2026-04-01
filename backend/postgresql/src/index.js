@@ -1,4 +1,5 @@
-import { createPostTable } from "./concepts/relationships.js"
+import { getAllUsersWithTheirPosts, getUsersWithPosts } from "./concepts/join.js"
+import { insertPost } from "./concepts/relationships.js"
 import { getPaginatedUsers } from "./concepts/sorting-pagination.js"
 
 async function testQueries(params) {
@@ -22,9 +23,14 @@ async function testQueries(params) {
 }
 
 async function testRelationsQeurise() {
-  try { 
-
-    await createPostTable()
+  try {
+    // 建表
+    // await createPostTable()
+    // 插入数据
+    await insertPost(12, "first artical", "daskjhdaskgd askdjghaskdgha")
+    await insertPost(12, "second artical", "daskjhdaskgd askdjghaskdgha")
+    await insertPost(12, "third artical", "daskjhdaskgd askdjghaskdgha")
+    await insertPost(12, "fourth artical", "daskjhdaskgd askdjghaskdgha")
   }
   catch (err) {
     console.log(err)
@@ -32,4 +38,14 @@ async function testRelationsQeurise() {
 }
 
 // testQueries()
-testRelationsQeurise()
+// testRelationsQeurise()
+async function testJoinQueries(params) {
+  try {
+    await getUsersWithPosts()
+    await getAllUsersWithTheirPosts()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+testJoinQueries()
