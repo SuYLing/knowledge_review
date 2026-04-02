@@ -15,8 +15,8 @@ model Book {
   id            Int      @id @default(autoincrement())
   title         String
   publishedDate DateTime
-  // 建立关系
-  author        Author   @relation(fields: [authorId], references: [id])
+  // 建立关系, 删除作者后，同时删除其对应的books
+  author        Author   @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId      Int
 }
 
