@@ -1,0 +1,33 @@
+version: '1.1'
+
+services:
+  database:
+    image: postgres
+    container_name: postgres_learn
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123yuling
+      POSTGRES_DB: prisma-with-postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+  app:
+    build: .
+    container_name: express_api
+    depends_on:
+      - database
+    environment:
+      - DATABASE_URL=postgresql://postgres:123yuling@localhost:5432/prisma-with-postgres?schema=public
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: ['sh', '-c', 'pnpm dlx prisma generate && node src/inde.js']
+
+volumes:
+  postgres_data:
+
