@@ -1,21 +1,17 @@
-FROM node:20-alpine
+FROM node:20
 
 WORKDIR /usr/src/app
 
 # 启用 pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
-# 复制 package 文件
-COPY package.json pnpm-lock.yaml ./
-
-# 复制剩余源码
+# 只提供运行环境，不复制源码
 COPY . .
 
-# 安装依赖（必须加 --ignore-scripts）
-RUN pnpm install --frozen-lockfile --ignore-scripts
+RUN pnpm install 
 
-
+RUN pnpm exec prisma generate
 
 EXPOSE 3000
 
-CMD ["node", "src/index.js"]
+CMD ["sh", "-c", "node src/index.js"]
