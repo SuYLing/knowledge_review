@@ -1,0 +1,11 @@
+services:
+  database:
+    image: postgres
+    container_name: nest-learn
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=123yuling
+      - POSTGRES_USER=yuling
+      - POSTGRES_DB=nest-learn
