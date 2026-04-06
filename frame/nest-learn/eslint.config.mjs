@@ -31,6 +31,8 @@ export default defineConfig(
     rules: {
       "@typescript-eslint/no-floating-promises": "off",
       "@typescript-eslint/no-extraneous-class": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/restrict-template-expressions": 'off'
     }
   }
 )
