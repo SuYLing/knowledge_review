@@ -28,27 +28,13 @@ export class AuthService {
   async login(loginDto: LoginDto) {
     const { email, password } = loginDto
 
-    const user = await this.prismaService.user.findUnique({
-      where: {
-        email,
-      },
-    })
-    if (!user) {
-      // 用户不存在
-      throw new NotFoundException('用户不存在，请先注册')
-    }
-    const { password: _, ...rest } = user
-    const isMatchedPassword = await bcrypt.compare(password, user.password)
-    if (!isMatchedPassword) {
-      // 密码错误
-      throw new UnauthorizedException('用户密码错误')
-    }
+    const user = await this.validateUser(email, password)
     const token = await this.jwtService.signAsync({
       userId: user.id,
       email: user.email,
     })
     return {
-      ...rest,
+      ...user,
       access_token: token,
     }
   }
@@ -59,5 +45,21 @@ export class AuthService {
       },
     })
     return !!user
+  }
+  async validateUser(email: string, password: string) {
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        email,
+      },
+    })
+    if (!user) {
+      throw new NotFoundException('用户不存在')
+    }
+    const { password: userPassword, ...rest } = user
+    const isMatchedPassword = await bcrypt.compare(password, userPassword)
+    if (!isMatchedPassword) {
+      throw new UnauthorizedException('用户密码错误')
+    }
+    return rest
   }
 }
