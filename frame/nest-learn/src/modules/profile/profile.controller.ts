@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common'
+import { Body, Controller, Delete, Get, Param, Patch, Post, Request, UseGuards } from '@nestjs/common'
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
 import { CreateProfileDto } from './dto/create-profile.dto'
 import { UpdateProfileDto } from './dto/update-profile.dto'
@@ -14,7 +14,8 @@ export class ProfileController {
   }
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
+  findAll(@Request() req: Request & { user: { userId: number; email: string } }) {
+    console.log(req.headers)
     return this.profileService.findAll()
   }
 
