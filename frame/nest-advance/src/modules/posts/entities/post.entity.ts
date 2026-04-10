@@ -1,15 +1,23 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm'
 
 @Entity()
 export class Post {
   @PrimaryGeneratedColumn()
-  id?: number
+  id: number
   @Column()
-  title?: string
-  @Column({
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP',
-    nullable: false,
-  })
-  createAt?: string
+  title: string
+  @Column({ type: 'text' })
+  content: string
+  @Column()
+  authorName: string
+  @CreateDateColumn()
+  createAt: Date
+  @UpdateDateColumn()
+  updateAt: Date
 }

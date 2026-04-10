@@ -1,5 +1,7 @@
 import {
+  Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -17,23 +19,26 @@ export class PostsController {
   constructor(private readonly postsService: PostsService) {}
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  create(createPostDto: CreatePostDto) {
-    return this.postsService.create(createPostDto)
+  async create(@Body() createPostDto: CreatePostDto) {
+    return await this.postsService.create(createPostDto)
   }
   @Get()
-  findAll() {
-    return this.postsService.findAll()
+  async findAll() {
+    return await this.postsService.findAll()
   }
   @Get('/:id')
-  findOne() {
-    return this.postsService.findAll()
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.postsService.findOne(id)
   }
   @Put('/:id')
-  update(@Param('id', ParseIntPipe) id: number, updatePostDto: UpdatePostDto) {
-    return this.postsService.update(id, updatePostDto)
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updatePostDto: UpdatePostDto,
+  ) {
+    return await this.postsService.update(id, updatePostDto)
   }
-  @Get('/id')
-  delete(@Param('id', ParseIntPipe) id: number) {
-    return this.postsService.delete(id)
+  @Delete('/:id')
+  async delete(@Param('id', ParseIntPipe) id: number) {
+    return await this.postsService.delete(id)
   }
 }

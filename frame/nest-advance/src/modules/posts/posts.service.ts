@@ -7,24 +7,19 @@ import { Post } from './entities/post.entity'
 
 @Injectable()
 export class PostsService {
-  private posts = []
   constructor(
     @InjectRepository(Post)
     private readonly postsRepository: Repository<Post>,
   ) {}
-  create(post: CreatePostDto) {
-    const newPost = this.postsRepository.create(post)
-    return newPost
+  async create(post: CreatePostDto) {
+    const newlyPost = this.postsRepository.create(post)
+    return await this.postsRepository.save(newlyPost)
   }
   async findAll() {
-    return this.postsRepository.find({})
+    return await this.postsRepository.find({})
   }
   async findOne(id: number) {
-    return this.postsRepository.findOne({
-      where: {
-        id,
-      },
-    })
+    return await this.postsRepository.findOneBy({ id })
   }
   async delete(id: number) {
     return await this.postsRepository.delete(id)
