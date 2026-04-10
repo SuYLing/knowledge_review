@@ -1,10 +1,12 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { GlobalModule } from './global/global.module';
+import { Module } from '@nestjs/common'
+import { AppController } from './app.controller'
+import { AppService } from './app.service'
+import { GlobalModule } from './global/global.module'
+import { PostsModule } from './modules/posts/posts.module'
+import { SharedModule } from './shared/shared.module'
 
 @Module({
-  imports: [GlobalModule],
+  imports: [GlobalModule, SharedModule,PostsModule],
   controllers: [AppController],
   providers: [AppService],
 })
