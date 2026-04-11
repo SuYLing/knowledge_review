@@ -11,6 +11,9 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common'
+import { Roles } from 'src/decorators/role.decorator'
+import { User, type UserType } from 'src/decorators/user.decorator'
+import { RolesGuard } from 'src/guards/roles.guard'
 import { JwtAuthGuard } from '../auth/guards/jwt.guard'
 import { CreatePostDto } from './dtos/create.dto'
 import { UpdatePostDto } from './dtos/update.dto'
@@ -25,6 +28,8 @@ export class PostsController {
   async create(@Body() createPostDto: CreatePostDto) {
     return await this.postsService.create(createPostDto)
   }
+  @Roles(['admin'])
+  @UseGuards(RolesGuard)
   @Get()
   async findAll() {
     return await this.postsService.findAll()
