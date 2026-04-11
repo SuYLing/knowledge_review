@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   NotFoundException,
@@ -69,7 +70,11 @@ export class AuthService {
 
   // 辅助函数
   private async verifyPassword(password: string, hasdedPassword: string) {
-    return await bcrypt.compare(password, hasdedPassword)
+    try {
+      return await bcrypt.compare(password, hasdedPassword)
+    } catch (_) {
+      throw new BadRequestException('Invild password')
+    }
   }
   private async hasdedPassword(password: string) {
     return await bcrypt.hash(password, 10)
