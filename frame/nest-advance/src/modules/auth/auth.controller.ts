@@ -15,4 +15,12 @@ export class AuthController {
   async register(@Body() registerDto: RegisterDto) {
     return await this.authService.register(registerDto)
   }
+  @Post('create-admin')
+  async createAdmin() {
+    return await this.authService.createAdmin()
+  }
+  @Post('refreshToken')
+  async refreshToken(@Body() refreshToken: string) {
+    return await this.authService.refreshToken(refreshToken)
+  }
 }

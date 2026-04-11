@@ -17,7 +17,7 @@ import { LocalStrategy } from './strategies/local.strategy'
         return {
           secret: configService.get<string>('JWT_SECRET') ?? '123yuling',
           signOptions: {
-            expiresIn: '6h',
+            expiresIn: '1h',
           },
         }
       },
