@@ -34,7 +34,7 @@ export class User {
     default: UserRole.USER,
   })
   role: UserRole
-  @OneToMany(() => Post, (post) => post.authorName)
+  @OneToMany(() => Post, (post) => post.author, { onDelete: 'CASCADE' })
   posts: Post[]
   @CreateDateColumn()
   createAt: Date

@@ -12,11 +12,11 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { Roles } from 'src/decorators/role.decorator'
-import { User, type UserType } from 'src/decorators/user.decorator'
 import { RolesGuard } from 'src/guards/roles.guard'
 import { JwtAuthGuard } from '../auth/guards/jwt.guard'
 import { CreatePostDto } from './dtos/create.dto'
 import { UpdatePostDto } from './dtos/update.dto'
+import { PistExistPipe } from './pipes/post.pipe'
 import { PostsService } from './posts.service'
 
 @Controller('posts')
@@ -39,14 +39,16 @@ export class PostsController {
     return await this.postsService.findOne(id)
   }
   @Put('/:id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   async update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', ParseIntPipe, PistExistPipe) id: number,
     @Body() updatePostDto: UpdatePostDto,
   ) {
-    return await this.postsService.update(id, updatePostDto)
+    await this.postsService.update(id, updatePostDto)
   }
   @Delete('/:id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   async delete(@Param('id', ParseIntPipe) id: number) {
-    return await this.postsService.delete(id)
+    await this.postsService.delete(id)
   }
 }

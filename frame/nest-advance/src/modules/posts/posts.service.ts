@@ -16,10 +16,27 @@ export class PostsService {
     return await this.postsRepository.save(newlyPost)
   }
   async findAll() {
-    return await this.postsRepository.find({})
+    return await this.postsRepository.find({
+      relations: {
+        author: true,
+      },
+      select: {
+        author: {
+          id: true,
+          email: true,
+          name: true,
+          createAt: true,
+        },
+      },
+    })
   }
   async findOne(id: number) {
-    return await this.postsRepository.findOneBy({ id })
+    return await this.postsRepository.findOne({
+      where: { id },
+      relations: {
+        author: true,
+      },
+    })
   }
   async delete(id: number) {
     return await this.postsRepository.delete(id)
