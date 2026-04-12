@@ -63,8 +63,8 @@ export class AuthService {
     const user = await this.userRepository.findOneBy({ id: payload.sub })
     if (!user) throw new NotFoundException('错误的token')
     return {
-      accessToken: this.generateAccessToken(user),
-      refreshToken: this.generateRefreshToken(user),
+      accessToken: await this.generateAccessToken(user),
+      refreshToken: await this.generateRefreshToken(user),
     }
   }
 

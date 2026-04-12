@@ -20,7 +20,7 @@ export class AuthController {
     return await this.authService.createAdmin()
   }
   @Post('refreshToken')
-  async refreshToken(@Body() refreshToken: string) {
+  async refreshToken(@Body() { refreshToken }: { refreshToken: string }) {
     return await this.authService.refreshToken(refreshToken)
   }
 }
