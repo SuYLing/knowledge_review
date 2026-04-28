@@ -1,4 +1,10 @@
+import { SignUpForm } from './sign-up-form'
+
 export default async function SignUpPage() {
-  return <div>sign up page</div>
+	return (
+		<main className="w-full max-w-md">
+			<SignUpForm />
+		</main>
+	)
 }
 
