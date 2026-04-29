@@ -14,22 +14,46 @@ import {
 	FieldLabel,
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
+import { authClient } from '@/lib/auth-client'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form'
-interface SignInInputs {
-	name: string
-	email: string
-	password: string
-	confirmPasswprd: string
-}
+import { toast } from 'sonner'
+import z from 'zod'
+
+const signUpInputsSchema = z.object({
+	name: z.string(),
+	email: z.email(),
+	password: z.string().min(6, '密码需要大于六位'),
+	confirmPassword: z.string().min(6, '密码需要大于六位'),
+})
+type SignUpInputs = z.infer<typeof signUpInputsSchema>
 export const SignUpForm = () => {
-	const form = useForm<SignInInputs>({
+	const router = useRouter()
+	const form = useForm({
+		resolver: zodResolver(signUpInputsSchema),
 		defaultValues: {
 			name: '',
 			password: '',
+			email: '',
+			confirmPassword: '',
 		},
 	})
-	const sumbit: SubmitHandler<SignInInputs> = (data) => {
+	const sumbit: SubmitHandler<SignUpInputs> = async (data) => {
+		const { email, password, name } = data
 		console.log(data)
+		const { error } = await authClient.signUp.email({
+			email,
+			password,
+			name,
+			callbackURL: '/',
+		})
+		if (error) {
+			toast.error(error.message && 'something get error')
+		} else {
+			toast.success('注册成功')
+			router.replace('/sign-in')
+		}
 	}
 	return (
 		<Card>
@@ -59,7 +83,7 @@ export const SignUpForm = () => {
 						/>
 						<Controller
 							control={form.control}
-							name="name"
+							name="email"
 							render={({ field, fieldState }) => (
 								<Field data-invalid={fieldState.invalid}>
 									<FieldLabel htmlFor="email">邮箱</FieldLabel>
@@ -93,14 +117,14 @@ export const SignUpForm = () => {
 						/>
 						<Controller
 							control={form.control}
-							name="confirmPasswprd"
+							name="confirmPassword"
 							render={({ field, fieldState }) => (
 								<Field data-invalid={fieldState.invalid}>
-									<FieldLabel htmlFor="confirmPasswprd">确认密码</FieldLabel>
+									<FieldLabel htmlFor="confirmPassword">确认密码</FieldLabel>
 									<Input
 										{...field}
 										type="password"
-										id="confirmPasswprd"
+										id="confirmPassword"
 										aria-invalid={fieldState.invalid}
 									/>
 								</Field>
