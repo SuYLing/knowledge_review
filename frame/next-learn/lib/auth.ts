@@ -10,6 +10,14 @@ export const auth = betterAuth({
 	database: prismaAdapter(prisma, {
 		provider: 'postgresql', // or "mysql", "postgresql", ...etc
 	}),
+	user: {
+		additionalFields: {
+			role: {
+				type: 'string',
+				input: false,
+			},
+		},
+	},
 	emailAndPassword: {
 		enabled: true,
 	},
@@ -20,4 +28,7 @@ export const auth = betterAuth({
 		},
 	},
 })
+
+export type Session = typeof auth.$Infer.Session
+export type User = typeof auth.$Infer.Session.user
 
