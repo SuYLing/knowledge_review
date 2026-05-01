@@ -5,10 +5,12 @@ export default async function DashboardPage() {
 	const session = await getSession()
 	const user = session?.user
 	if (!user) unauthorized()
+    console.log(user)
 	return (
 		<div>
 			<h1 className="font-bold">welcome! {user.name}</h1>
 			<h1 className="font-bold">{user.email}</h1>
+      <h2>role: {user.role}</h2>
 		</div>
 	)
 }
