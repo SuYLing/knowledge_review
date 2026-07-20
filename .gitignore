@@ -142,3 +142,4 @@ docker/mongo/data
 mongo-data
 
 uploads
+.DS_Store
